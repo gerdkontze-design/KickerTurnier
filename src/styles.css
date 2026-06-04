@@ -5,16 +5,17 @@
   --accent: #06b6d4;
   --highlight: #22c55e;
   --muted: rgba(255,255,255,0.7);
+  --touch-min: 44px;
 }
 *{box-sizing:border-box;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial}
 body,html,#root{height:100%;margin:0}
 body{background:linear-gradient(135deg,var(--bg1),var(--bg2));color:#fff}
 .app-root{background-image: url('/src/assets/bg-hip.svg');background-size:cover;background-position:center;background-attachment:fixed}
 .app-root{min-height:100vh;display:flex;flex-direction:column}
-.app-header{padding:24px;font-size:28px;font-weight:700;text-align:center}
-.app-main{flex:1;padding:16px;display:flex;justify-content:center}
+.app-header{padding:24px 16px;font-size:28px;font-weight:700;text-align:center}
+.app-main{flex:1;padding:16px;display:flex;justify-content:center;width:100%}
 .card{background:var(--card);border-radius:12px;padding:16px;margin:8px}
-.tournament-layout{display:flex;gap:16px;width:100%;max-width:1100px;position:relative}
+.tournament-layout{display:flex;gap:16px;width:100%;max-width:1100px;position:relative;flex-direction:row}
 .tournament-layout.highlight-current::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,6,23,0.45),rgba(6,30,40,0.55));mix-blend-mode:overlay;pointer-events:none;z-index:0;border-radius:12px}
 .tournament-layout > *{position:relative;z-index:1}
 
@@ -41,33 +42,37 @@ body{background:linear-gradient(135deg,var(--bg1),var(--bg2));color:#fff}
 .team{min-width:0}
 .team:first-child{justify-self:end}
 .team:last-child{justify-self:start}
-.players{font-weight:600;margin-bottom:6px}
+.players{font-weight:600;margin-bottom:6px;font-size:14px}
 .vs{flex:0 0 80px;width:80px;text-align:center;color:var(--muted);display:flex;align-items:center;justify-content:center}
 .vs.played{color:#fff}
 .score-stack{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;justify-items:center;gap:8px;width:80px}
 .score-stack .score-a{justify-self:end;font-size:22px;font-weight:800;line-height:1}
 .score-stack .colon{font-size:20px;color:rgba(255,255,255,0.9);line-height:1}
 .score-stack .score-b{justify-self:start;font-size:22px;font-weight:800;line-height:1}
-input[type=number],textarea,input{width:100%;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff}
-label{display:block;margin-bottom:12px}
-.actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
-button{background:var(--accent);border:none;padding:8px 12px;border-radius:8px;color:#042029;cursor:pointer}
+input[type=number],textarea,input{width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff;font-size:16px;min-height:44px}
+textarea{min-height:120px;resize:vertical}
+label{display:block;margin-bottom:16px;font-size:14px}
+.actions{display:flex;gap:12px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+.match-actions{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+button{background:var(--accent);border:none;padding:12px 16px;border-radius:8px;color:#042029;cursor:pointer;font-weight:600;min-height:44px;min-width:44px;font-size:14px;transition:all 0.2s ease}
+button:active{transform:scale(0.98);opacity:0.9}
 .standings{width:100%;border-collapse:collapse}
-.standings th,.standings td{padding:6px 8px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.03)}
-.app-footer{text-align:center;padding:8px;font-size:12px;color:var(--muted)}
+.standings th,.standings td{padding:8px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.03);font-size:13px}
+.standings th{font-weight:600}
+.app-footer{text-align:center;padding:12px 16px;font-size:12px;color:var(--muted)}
 
 /* Quick score buttons */
-.quick-buttons{display:flex;gap:12px;margin-top:8px}
-.qb-col{flex:1}
-.qb-label{font-size:12px;color:var(--muted);margin-bottom:6px}
-.quick-btn{display:inline-block;margin:4px 6px 4px 0;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);color:#fff;cursor:pointer}
+.quick-buttons{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+.qb-col{flex:1;min-width:120px}
+.qb-label{font-size:12px;color:var(--muted);margin-bottom:8px}
+.quick-btn{display:inline-block;margin:6px 6px 6px 0;padding:10px 12px;border-radius:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);color:#fff;cursor:pointer;min-height:40px;min-width:40px;font-size:12px}
 
 /* Saved badge */
-.saved-badge{margin-left:12px;background:rgba(34,197,94,0.15);color:#22c55e;padding:6px 10px;border-radius:999px;font-weight:600}
+.saved-badge{margin-left:12px;background:rgba(34,197,94,0.15);color:#22c55e;padding:8px 12px;border-radius:999px;font-weight:600}
 
 /* Mode toggle */
 .mode-toggle{display:inline-flex;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.04)}
-.mode-toggle button{background:transparent;color:#fff;padding:6px 10px;border-radius:0;margin:0;border:none}
+.mode-toggle button{background:transparent;color:#fff;padding:10px 12px;border-radius:0;margin:0;border:none;font-size:13px}
 .mode-toggle button.active{background:rgba(6,182,212,0.12);color:var(--accent);font-weight:700}
 
 /* Match result summary and winner highlight */
@@ -75,11 +80,11 @@ button{background:var(--accent);border:none;padding:8px 12px;border-radius:8px;c
 .result-summary{font-size:18px;font-weight:700;margin-top:6px}
 
 /* match move buttons */
-.tournament-move button{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff;padding:6px 8px;border-radius:6px;cursor:pointer}
+.tournament-move button{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff;padding:8px;border-radius:6px;cursor:pointer;min-width:44px;min-height:44px}
 
 /* Current match highlight */
 .match.current{box-shadow:0 8px 18px rgba(0,0,0,0.35);border:1px solid rgba(250,204,21,0.28);background:linear-gradient(90deg, rgba(250,204,21,0.12), rgba(250,204,21,0.04));padding:14px;border-radius:12px;position:relative;z-index:3;overflow:hidden}
-.current-badge{position:relative;top:-10px;left:8px;background:#facc15;color:#042029;padding:6px 10px;border-radius:999px;font-weight:700;margin-bottom:6px;display:inline-block}
+.current-badge{position:relative;top:-10px;left:8px;background:#facc15;color:#042029;padding:6px 10px;border-radius:999px;font-weight:700;margin-bottom:6px;display:inline-block;font-size:12px}
 
 /* stronger full-background emphasis: make current match visually distinct */
 .match.current .team{background:transparent}
@@ -112,7 +117,9 @@ fieldset label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 fieldset label input[type="number"],
@@ -122,13 +129,18 @@ fieldset label input[type="checkbox"] {
 }
 
 fieldset label input[type="number"] {
-  width: 60px;
+  width: 70px;
   text-align: center;
+  min-height: 40px;
 }
 
 fieldset label input[type="checkbox"] {
   width: auto;
+  height: auto;
+  min-height: auto;
+  min-width: auto;
   accent-color: var(--accent);
+  cursor: pointer;
 }
 
 fieldset label small {
@@ -137,5 +149,136 @@ fieldset label small {
   display: block;
   width: 100%;
   margin-top: 4px;
+}
+
+/* RESPONSIVE DESIGN */
+
+/* Tablet/Medium (640px - 1024px) */
+@media (max-width: 1024px) {
+  .app-header{padding:20px 12px;font-size:24px}
+  .app-main{padding:12px}
+  .card{padding:14px;margin:6px}
+  .tournament-layout{gap:12px}
+  .left{flex:1.5}
+  .right{flex:1}
+  .matches-list{max-height:60vh}
+}
+
+/* Mobile (< 640px) */
+@media (max-width: 640px) {
+  /* Core layout */
+  .app-header{padding:16px 12px;font-size:20px}
+  .app-main{padding:8px;flex-direction:column}
+  .card{padding:12px;margin:4px}
+  
+  /* Tournament layout - stack vertically */
+  .tournament-layout{flex-direction:column;gap:8px;max-width:100%}
+  .left{flex:1;order:1}
+  .right{flex:1;order:2}
+  
+  /* Matches list */
+  .matches-list{max-height:50vh;padding-right:4px}
+  
+  /* Match card tweaks */
+  .match{padding:10px;border-radius:6px;margin-bottom:6px}
+  .match-header{font-size:11px;margin-bottom:6px}
+  .teams{grid-template-columns:1fr 60px 1fr;gap:8px}
+  .players{font-size:12px;margin-bottom:4px}
+  .vs{width:60px;font-size:12px}
+  .score-stack{width:60px}
+  .score-stack .score-a{font-size:18px}
+  .score-stack .score-b{font-size:18px}
+  .score-stack .colon{font-size:16px}
+  
+  /* Input fields and labels */
+  input[type=number],textarea,input{padding:10px;border-radius:6px;font-size:16px;min-height:44px}
+  textarea{min-height:100px}
+  label{margin-bottom:12px;font-size:13px}
+  
+  /* Buttons */
+  button{padding:10px 12px;border-radius:6px;min-height:44px;min-width:44px;font-size:13px}
+  .actions{gap:8px;justify-content:stretch;margin-top:12px}
+  .actions button{flex:1;min-width:auto}
+  
+  /* Quick score buttons - wider on mobile */
+  .quick-buttons{gap:8px;justify-content:stretch}
+  .qb-col{min-width:auto;flex:1}
+  .quick-btn{flex:1;padding:8px 10px;font-size:12px;min-height:44px}
+  
+  /* Standings - horizontal scroll on small screens */
+  .standings th,.standings td{padding:6px 4px;font-size:11px}
+  .standings{font-size:12px;display:block;overflow-x:auto}
+  
+  /* Mode toggle */
+  .mode-toggle{flex-wrap:wrap;width:100%;margin-bottom:8px}
+  .mode-toggle button{padding:8px 10px;font-size:12px;flex:1}
+  
+  /* Match move buttons - bigger for touch */
+  .tournament-move button{padding:6px;min-width:44px;min-height:44px;font-size:16px}
+  
+  /* Footer */
+  .app-footer{padding:8px 12px;font-size:11px}
+  
+  /* Match card layout - better for small screens */
+  .match-header{display:flex;justify-content:space-between;font-size:10px}
+  
+  /* Current badge */
+  .current-badge{font-size:11px;padding:4px 8px}
+  
+  /* GameRules fieldset */
+  fieldset {
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
+  fieldset label {
+    justify-content:space-between;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  
+  fieldset label input[type="number"] {
+    width: 60px;
+    min-height: 40px;
+    padding: 8px;
+  }
+  
+  fieldset label small {
+    font-size: 10px;
+    margin-top: 2px;
+  }
+  
+  legend {
+    font-size: 11px;
+  }
+}
+
+/* Extra small (< 480px) */
+@media (max-width: 480px) {
+  .app-header{font-size:18px;padding:12px 10px}
+  .app-main{padding:4px}
+  .card{padding:10px;margin:2px;border-radius:8px}
+  
+  .match{padding:8px}
+  .teams{grid-template-columns:1fr 50px 1fr;gap:6px}
+  .players{font-size:11px}
+  .vs{width:50px}
+  .score-stack{width:50px}
+  .score-stack .score-a,.score-stack .score-b{font-size:16px}
+  .score-stack .colon{font-size:14px}
+  
+  input[type=number],textarea,input{padding:8px;font-size:16px}
+  textarea{min-height:80px}
+  button{padding:9px 10px;font-size:12px}
+  
+  .standings th,.standings td{padding:4px 2px;font-size:10px}
+  
+  /* Stack action buttons fully */
+  .actions{flex-direction:column}
+  .actions button{width:100%}
+  
+  .mode-toggle button{font-size:11px;padding:6px 8px}
+  
+  .app-footer{font-size:10px;padding:6px}
 }
 
