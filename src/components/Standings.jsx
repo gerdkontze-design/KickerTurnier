@@ -38,19 +38,26 @@ export default function Standings({ rows = [], matches = [], players = [], mode 
             <th>GF</th>
             <th>GA</th>
             <th>Pkt</th>
+            <th title="Durchschnitt">x̄</th>
           </tr>
         </thead>
         <tbody>
-          {display.map((r, i) => (
-            <tr key={r.name}>
-              <td>{i + 1}</td>
-              <td>{r.name}</td>
-              <td>{r.played}</td>
-              <td>{r.gf}</td>
-              <td>{r.ga}</td>
-              <td>{r.points}</td>
-            </tr>
-          ))}
+          {display.map((r, i) => {
+            const played = Number(r.played) || 0
+            const points = Number(r.points) || 0
+            const avg = played > 0 ? (points / played).toFixed(2) : '0.00'
+            return (
+              <tr key={r.name}>
+                <td>{i + 1}</td>
+                <td>{r.name}</td>
+                <td>{played}</td>
+                <td>{r.gf}</td>
+                <td>{r.ga}</td>
+                <td>{points}</td>
+                <td>{avg}</td>
+              </tr>
+            )
+          })}
         </tbody>
       </table>
     </div>
