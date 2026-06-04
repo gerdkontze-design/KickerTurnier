@@ -1,0 +1,14 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Environment aware base (optional). If you host under a subpath, set BASE.
+# [context.production.environment]
+#   BASE = "/your-subpath/"
+
+[redirects]
+  # SPA fallback: serve index.html for all non-file routes
+  [[redirects]]
+    from = "/*"
+    to = "/index.html"
+    status = 200

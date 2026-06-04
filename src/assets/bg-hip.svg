@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#071022"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#g)" />
+  <g opacity="0.06" fill="#06b6d4">
+    <circle cx="300" cy="200" r="220" />
+    <circle cx="1600" cy="900" r="300" />
+    <rect x="900" y="-100" width="1200" height="300" transform="rotate(25 1500 50)" rx="80"/>
+  </g>
+  <g opacity="0.03" fill="#8b5cf6">
+    <circle cx="1200" cy="200" r="400" />
+    <rect x="-200" y="700" width="800" height="400" rx="60"/>
+  </g>
+  <!-- foosball rods and stylized players (colored) -->
+  <g opacity="0.09">
+    <!-- central rod -->
+    <rect x="120" y="420" width="1680" height="8" rx="4" fill="#ffffff" opacity="0.04" />
+
+    <!-- players: alternating teams (green / purple) -->
+    <g transform="translate(0,380)" fill="none">
+      <!-- helper to place players -->
+      <!-- left-to-right positions -->
+      <g id="players">
+        <!-- positions array rendered manually -->
+        <g transform="translate(260,0)">
+          <g fill="#16a34a" opacity="0.95">
+            <circle cx="0" cy="16" r="12" />
+            <rect x="-8" y="24" width="16" height="34" rx="6" />
+          </g>
+        </g>
+        <g transform="translate(440,0)">
+          <g fill="#7c3aed" opacity="0.95">
+            <circle cx="0" cy="16" r="12" />
+            <rect x="-8" y="24" width="16" height="34" rx="6" />
+          </g>
+        </g>
+        <g transform="translate(620,0)">
+          <g fill="#16a34a" opacity="0.95">
+            <circle cx="0" cy="16" r="12" />
+            <rect x="-8" y="24" width="16" height="34" rx="6" />
+          </g>
+        </g>
+        <g transform="translate(800,0)">
+          <g fill="#7c3aed" opacity="0.95">
+            <circle cx="0" cy="16" r="12" />
+            <rect x="-8" y="24" width="16" height="34" rx="6" />
+          </g>
+        </g>
+        <g transform="translate(980,0)">
+          <g fill="#16a34a" opacity="0.95">
+            <circle cx="0" cy="16" r="12" />
+            <rect x="-8" y="24" width="16" height="34" rx="6" />
+          </g>
+        </g>
+        <g transform="translate(1160,0)">
+          <g fill="#7c3aed" opacity="0.95">
+            <circle cx="0" cy="16" r="12" />
+            <rect x="-8" y="24" width="16" height="34" rx="6" />
+          </g>
+        </g>
+        <g transform="translate(1340,0)">
+          <g fill="#16a34a" opacity="0.95">
+            <circle cx="0" cy="16" r="12" />
+            <rect x="-8" y="24" width="16" height="34" rx="6" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

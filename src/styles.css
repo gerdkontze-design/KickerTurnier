@@ -1,0 +1,93 @@
+:root{
+  --bg1: #0f172a;
+  --bg2: #0b1220;
+  --card: rgba(255,255,255,0.04);
+  --accent: #06b6d4;
+  --highlight: #22c55e;
+  --muted: rgba(255,255,255,0.7);
+}
+*{box-sizing:border-box;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial}
+body,html,#root{height:100%;margin:0}
+body{background:linear-gradient(135deg,var(--bg1),var(--bg2));color:#fff}
+.app-root{background-image: url('/src/assets/bg-hip.svg');background-size:cover;background-position:center;background-attachment:fixed}
+.app-root{min-height:100vh;display:flex;flex-direction:column}
+.app-header{padding:24px;font-size:28px;font-weight:700;text-align:center}
+.app-main{flex:1;padding:16px;display:flex;justify-content:center}
+.card{background:var(--card);border-radius:12px;padding:16px;margin:8px}
+.tournament-layout{display:flex;gap:16px;width:100%;max-width:1100px;position:relative}
+.tournament-layout.highlight-current::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,6,23,0.45),rgba(6,30,40,0.55));mix-blend-mode:overlay;pointer-events:none;z-index:0;border-radius:12px}
+.tournament-layout > *{position:relative;z-index:1}
+
+/* matches list scrolling */
+.matches-list{max-height:65vh;overflow:auto;padding-right:8px}
+
+/* Custom scrollbar: modern look for matches list (WebKit + Firefox) */
+.matches-list{scrollbar-width:thin;scrollbar-color:#06b6d4 rgba(255,255,255,0.02)}
+.matches-list::-webkit-scrollbar{width:12px}
+.matches-list::-webkit-scrollbar-track{background:transparent;margin:8px 0;border-radius:999px}
+.matches-list::-webkit-scrollbar-thumb{background:linear-gradient(180deg, rgba(6,182,212,0.95), rgba(6,182,212,0.75));border-radius:999px;border:3px solid rgba(10,14,20,0.45);box-shadow:inset 0 0 6px rgba(0,0,0,0.35)}
+.matches-list::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg, rgba(6,182,212,1), rgba(6,182,212,0.85))}
+
+/* Make scrollbars on right column consistent */
+.right{scrollbar-width:thin;scrollbar-color:#06b6d4 rgba(255,255,255,0.02)}
+.right::-webkit-scrollbar{width:10px}
+.right::-webkit-scrollbar-thumb{background:rgba(6,182,212,0.85);border-radius:999px;border:2px solid rgba(10,14,20,0.45)}
+.matches-list .match{margin-bottom:8px}
+.left{flex:2}
+.right{flex:1;display:flex;flex-direction:column;gap:12px}
+.match{border-radius:8px;padding:12px;background:linear-gradient(180deg,rgba(255,255,255,0.03),transparent);margin-bottom:8px}
+.match-header{font-size:12px;color:var(--muted);margin-bottom:8px}
+.teams{display:grid;grid-template-columns:1fr 80px 1fr;align-items:center;gap:12px}
+.team{min-width:0}
+.team:first-child{justify-self:end}
+.team:last-child{justify-self:start}
+.players{font-weight:600;margin-bottom:6px}
+.vs{flex:0 0 80px;width:80px;text-align:center;color:var(--muted);display:flex;align-items:center;justify-content:center}
+.vs.played{color:#fff}
+.score-stack{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;justify-items:center;gap:8px;width:80px}
+.score-stack .score-a{justify-self:end;font-size:22px;font-weight:800;line-height:1}
+.score-stack .colon{font-size:20px;color:rgba(255,255,255,0.9);line-height:1}
+.score-stack .score-b{justify-self:start;font-size:22px;font-weight:800;line-height:1}
+input[type=number],textarea,input{width:100%;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff}
+label{display:block;margin-bottom:12px}
+.actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+button{background:var(--accent);border:none;padding:8px 12px;border-radius:8px;color:#042029;cursor:pointer}
+.standings{width:100%;border-collapse:collapse}
+.standings th,.standings td{padding:6px 8px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.03)}
+.app-footer{text-align:center;padding:8px;font-size:12px;color:var(--muted)}
+
+/* Quick score buttons */
+.quick-buttons{display:flex;gap:12px;margin-top:8px}
+.qb-col{flex:1}
+.qb-label{font-size:12px;color:var(--muted);margin-bottom:6px}
+.quick-btn{display:inline-block;margin:4px 6px 4px 0;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);color:#fff;cursor:pointer}
+
+/* Saved badge */
+.saved-badge{margin-left:12px;background:rgba(34,197,94,0.15);color:#22c55e;padding:6px 10px;border-radius:999px;font-weight:600}
+
+/* Mode toggle */
+.mode-toggle{display:inline-flex;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.04)}
+.mode-toggle button{background:transparent;color:#fff;padding:6px 10px;border-radius:0;margin:0;border:none}
+.mode-toggle button.active{background:rgba(6,182,212,0.12);color:var(--accent);font-weight:700}
+
+/* Match result summary and winner highlight */
+.match .team.winner{background:linear-gradient(90deg, rgba(34,197,94,0.12), transparent);border-radius:8px;padding:8px}
+.result-summary{font-size:18px;font-weight:700;margin-top:6px}
+
+/* match move buttons */
+.tournament-move button{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff;padding:6px 8px;border-radius:6px;cursor:pointer}
+
+/* Current match highlight */
+.match.current{box-shadow:0 8px 18px rgba(0,0,0,0.35);border:1px solid rgba(250,204,21,0.28);background:linear-gradient(90deg, rgba(250,204,21,0.12), rgba(250,204,21,0.04));padding:14px;border-radius:12px;position:relative;z-index:3;overflow:hidden}
+.current-badge{position:relative;top:-10px;left:8px;background:#facc15;color:#042029;padding:6px 10px;border-radius:999px;font-weight:700;margin-bottom:6px;display:inline-block}
+
+/* stronger full-background emphasis: make current match visually distinct */
+.match.current .team{background:transparent}
+.match.current .players{color:#e6fffb}
+.match.current .result-summary{color:#022f2f}
+.match.current .winner{box-shadow:0 8px 18px rgba(250,204,21,0.12);}
+
+/* inner glow: keep the effect strictly inside the card (yellow) */
+.match.current{box-shadow:0 8px 18px rgba(0,0,0,0.35), inset 0 0 56px rgba(250,204,21,0.10)}
+.match.current::after{content:'';position:absolute;inset:10px;border-radius:8px;z-index:1;pointer-events:none;background:radial-gradient(circle at 50% 20%, rgba(250,204,21,0.12), rgba(250,204,21,0.05) 28%, transparent 42%);}
+
