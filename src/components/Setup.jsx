@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import GameRules from './GameRules'
 
 function parseNames(text) {
   return text
@@ -13,6 +14,16 @@ export default function Setup({ onStart }) {
   const [gameMinutes, setGameMinutes] = useState(7)
   const [totalMinutes, setTotalMinutes] = useState(180)
   const [schedulingMode, setSchedulingMode] = useState('time')
+  const [rules, setRules] = useState({
+    winsAt: 6,
+    maxDiff: 4,
+    allowDraws: true,
+    pointsWinClear: 4,
+    pointsWinMid: 3,
+    pointsWinClose: 2,
+    pointsLoseClose: 1,
+    pointsDraw: 1
+  })
 
   // very small SA-based optimizer used only for moderate sizes
   function generateOptimized(players, tables, rounds) {
@@ -196,7 +207,7 @@ export default function Setup({ onStart }) {
   function handleStart() {
     const players = parseNames(names)
     if (players.length < 4) return alert('Mindestens 4 Spieler erforderlich')
-    const tournament = { tables: Math.max(1, Number(tables) || 1), gameMinutes: Number(gameMinutes) || 7, totalMinutes: Number(totalMinutes) || 180, players, mode: 'team', matches: [], standings: {}, createdAt: Date.now() }
+    const tournament = { tables: Math.max(1, Number(tables) || 1), gameMinutes: Number(gameMinutes) || 7, totalMinutes: Number(totalMinutes) || 180, players, rules, mode: 'team', matches: [], standings: {}, createdAt: Date.now() }
     try { tournament.matches = generateRounds(players, tournament.tables, tournament.gameMinutes, tournament.totalMinutes, schedulingMode); onStart(tournament) } catch (err) { console.error('Error generating rounds', err); alert('Fehler beim Erzeugen des Turniers: ' + (err && err.message ? err.message : String(err))) }
   }
 
@@ -237,6 +248,7 @@ export default function Setup({ onStart }) {
           return <div>Mindestens 4 Spieler für Schätzung erforderlich</div>
         })()}
       </div>
+      <GameRules rules={rules} onChange={setRules} />
       <div className="actions">
         <button onClick={handleStart}>Turnier starten</button>
       </div>

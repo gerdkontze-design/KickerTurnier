@@ -91,3 +91,51 @@ button{background:var(--accent);border:none;padding:8px 12px;border-radius:8px;c
 .match.current{box-shadow:0 8px 18px rgba(0,0,0,0.35), inset 0 0 56px rgba(250,204,21,0.10)}
 .match.current::after{content:'';position:absolute;inset:10px;border-radius:8px;z-index:1;pointer-events:none;background:radial-gradient(circle at 50% 20%, rgba(250,204,21,0.12), rgba(250,204,21,0.05) 28%, transparent 42%);}
 
+/* GameRules styles */
+fieldset {
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 12px;
+  margin: 12px 0;
+  background: rgba(255,255,255,0.01);
+}
+
+legend {
+  padding: 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+fieldset label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+fieldset label input[type="number"],
+fieldset label input[type="checkbox"] {
+  margin-left: 12px;
+  flex: 0 0 auto;
+}
+
+fieldset label input[type="number"] {
+  width: 60px;
+  text-align: center;
+}
+
+fieldset label input[type="checkbox"] {
+  width: auto;
+  accent-color: var(--accent);
+}
+
+fieldset label small {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+}
+

@@ -2,7 +2,18 @@ import React, { useRef, useEffect } from 'react'
 import MatchCard from './MatchCard'
 import Standings from './Standings'
 
-function calcStandings(matches, mode = 'team') {
+function calcStandings(matches, mode = 'team', rules = {}) {
+  const r = {
+    winsAt: rules.winsAt || 6,
+    maxDiff: rules.maxDiff || 4,
+    allowDraws: rules.allowDraws !== false,
+    pointsWinClear: rules.pointsWinClear || 4,
+    pointsWinMid: rules.pointsWinMid || 3,
+    pointsWinClose: rules.pointsWinClose || 2,
+    pointsLoseClose: rules.pointsLoseClose || 1,
+    pointsDraw: rules.pointsDraw || 1
+  }
+
   const table = {}
 
   function addEntry(name) {
@@ -14,6 +25,7 @@ function calcStandings(matches, mode = 'team') {
     if (!m.played) return
     const a = m.scoreA
     const b = m.scoreB
+    const diff = Math.abs(a - b)
 
     if (mode === 'team') {
       const kA = [...m.teamA].sort().join(' & ')
@@ -28,26 +40,23 @@ function calcStandings(matches, mode = 'team') {
       B.ga += a
 
       if (a === b) {
-        A.points += 1
-        B.points += 1
+        if (r.allowDraws) {
+          A.points += r.pointsDraw
+          B.points += r.pointsDraw
+        }
       } else {
-        const diff = Math.abs(a - b)
         const winner = a > b ? A : B
         const loser = a > b ? B : A
-        if (a === 6 && b === 0 || diff >= 4) {
-          // treat as 6:0 special (extra-safe check)
-          winner.points += 4
-        } else if (a === 6 && b === 0) {
-          winner.points += 4
+        if (diff >= r.maxDiff) {
+          winner.points += r.pointsWinClear
         } else if (diff >= 2) {
-          winner.points += 3
+          winner.points += r.pointsWinMid
         } else if (diff === 1) {
-          winner.points += 2
-          loser.points += 1
+          winner.points += r.pointsWinClose
+          loser.points += r.pointsLoseClose
         }
       }
     } else {
-      // individual mode: assign points to both players equally
       const playersA = m.teamA
       const playersB = m.teamB
       playersA.forEach((p) => addEntry(p))
@@ -67,20 +76,21 @@ function calcStandings(matches, mode = 'team') {
       })
 
       if (a === b) {
-        playersA.forEach((p) => (table[p].points += 1))
-        playersB.forEach((p) => (table[p].points += 1))
+        if (r.allowDraws) {
+          playersA.forEach((p) => (table[p].points += r.pointsDraw))
+          playersB.forEach((p) => (table[p].points += r.pointsDraw))
+        }
       } else {
-        const diff = Math.abs(a - b)
         const winnerPlayers = a > b ? playersA : playersB
         const loserPlayers = a > b ? playersB : playersA
 
-        if (a === 6 && b === 0) {
-          winnerPlayers.forEach((p) => (table[p].points += 4))
+        if (diff >= r.maxDiff) {
+          winnerPlayers.forEach((p) => (table[p].points += r.pointsWinClear))
         } else if (diff >= 2) {
-          winnerPlayers.forEach((p) => (table[p].points += 3))
+          winnerPlayers.forEach((p) => (table[p].points += r.pointsWinMid))
         } else if (diff === 1) {
-          winnerPlayers.forEach((p) => (table[p].points += 2))
-          loserPlayers.forEach((p) => (table[p].points += 1))
+          winnerPlayers.forEach((p) => (table[p].points += r.pointsWinClose))
+          loserPlayers.forEach((p) => (table[p].points += r.pointsLoseClose))
         }
       }
     }
@@ -118,7 +128,7 @@ export default function Tournament({ tournament, onUpdate, onReset }) {
     if (confirm('Turnier wirklich zurücksetzen?')) onReset()
   }
 
-  const standings = calcStandings(matches, mode)
+  const standings = calcStandings(matches, mode, tournament.rules)
 
   const firstUnplayed = matches.find((m) => !m.played)
   const currentRound = firstUnplayed ? firstUnplayed.round : null
