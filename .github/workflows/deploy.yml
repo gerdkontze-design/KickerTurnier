@@ -23,6 +23,8 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          BASE: '/KickerTurnier/'
         run: npm run build
 
       - name: Deploy to GitHub Pages
